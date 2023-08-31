@@ -24,7 +24,7 @@ class GroceryAdapter : RecyclerView.Adapter<GroceryAdapter.GroceryHolder>() {
 
     inner class GroceryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvGrocery: TextView = itemView.findViewById(R.id.tvGroceryName)
-        var tvCalories: TextView = itemView.findViewById(R.id.tvGroceryName)
+        var tvCalories: TextView = itemView.findViewById(R.id.tvNumberOfCalories)
         init {
             itemView.setOnClickListener {
                 if (position != RecyclerView.NO_POSITION){
