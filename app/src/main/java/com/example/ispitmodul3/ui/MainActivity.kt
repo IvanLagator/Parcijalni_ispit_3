@@ -21,8 +21,8 @@ import com.example.ispitmodul3.viewmodel.GroceryViewModel
 
 class MainActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var allGroceries: LiveData<List<Grocery>>
 
+    private lateinit var allGroceries: LiveData<List<Grocery>>
     private lateinit var groceryViewModel: GroceryViewModel
     private lateinit var adapter: GroceryAdapter
     private lateinit var recyclerView: RecyclerView
@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
                     adapter.groceries = it
                 }
             }
-
         })
     }
     private fun initRecyclerView() {
