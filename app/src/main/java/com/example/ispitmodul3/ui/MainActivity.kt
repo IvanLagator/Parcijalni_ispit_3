@@ -1,8 +1,11 @@
 package com.example.ispitmodul3.ui
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -46,20 +49,6 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             }
 
         })
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT){
-            override fun onMove(
-                recyclerView: RecyclerView,
-                viewHolder: RecyclerView.ViewHolder,
-                target: RecyclerView.ViewHolder
-            ): Boolean {
-                TODO("Not yet implemented")
-            }
-
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                groceryViewModel.delete(adapter.groceries[viewHolder.adapterPosition])
-            }
-
-        }).attachToRecyclerView(recyclerView)
     }
 
     private fun initRecyclerView() {
@@ -71,7 +60,20 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onItemClicked(grocery: Grocery) {
-        TODO("Not yet implemented")
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Alert")
+        builder.setMessage("Are you sure you want to delete this item?")
+
+        builder.setPositiveButton("Delete") { dialog, which ->
+            Toast.makeText(this,"Item deleted", Toast.LENGTH_SHORT).show()
+            groceryViewModel.delete(grocery)
+        }
+
+        builder.setNegativeButton("Cancel") { dialog, which ->
+            Toast.makeText(this, "Canceled",Toast.LENGTH_SHORT).show()
+        }
+        builder.show()
     }
 
     private fun saveData() {
@@ -85,7 +87,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
                     binding.etGroceryName.text.toString(),
                     binding.etNumberOfCalories.text.toString().toInt()
                 )
-               groceryViewModel.insert(grocery)
+                groceryViewModel.insert(grocery)
             }
         }
     }
