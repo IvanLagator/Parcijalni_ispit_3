@@ -25,17 +25,17 @@ class GroceryAdapter : RecyclerView.Adapter<GroceryAdapter.GroceryHolder>() {
     inner class GroceryHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var tvGrocery: TextView = itemView.findViewById(R.id.tvGroceryName)
         var tvCalories: TextView = itemView.findViewById(R.id.tvNumberOfCalories)
+
         init {
             itemView.setOnClickListener {
-                if (position != RecyclerView.NO_POSITION){
-                    onItemClickListener?.onItemClicked(groceries[position])
-                }
+                onItemClickListener?.onItemClicked(groceries[adapterPosition])
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GroceryHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.grocery_item, parent, false)
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.grocery_item, parent, false)
         return GroceryHolder(itemView)
     }
 
@@ -46,6 +46,6 @@ class GroceryAdapter : RecyclerView.Adapter<GroceryAdapter.GroceryHolder>() {
     override fun onBindViewHolder(holder: GroceryHolder, position: Int) {
         val currentUser = groceries[position]
         holder.tvGrocery.text = currentUser.name
-        holder.tvCalories.text = currentUser.calories.toString()
+        holder.tvCalories.text = currentUser.calories.toString() + " kcal"
     }
 }
