@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 
         })
     }
-
     private fun initRecyclerView() {
         recyclerView = findViewById(R.id.recyclerView)
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
